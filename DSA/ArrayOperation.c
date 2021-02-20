@@ -121,7 +121,9 @@ int main()
     return 0;
 }
 
-/*Give the size of the array (upto 99): 5
+/*
+OUTPUT:
+Give the size of the array (upto 99): 5
 
 Enter the array element: 1
 Enter the array element: 2
