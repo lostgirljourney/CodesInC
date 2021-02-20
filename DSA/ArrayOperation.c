@@ -73,17 +73,33 @@ int main()
         {
             printf("\nEnter the element to insert: ");
             scanf("%d", &element);
-            printf("\nEnter the index: ");
+            printf("Enter the index: ");
             scanf("%d", &index);
-            indInsertion(arr, size, element, 100, index);
-            size++;
+            int res = indInsertion(arr, size, element, 100, index);
+            if(res == -1)
+            {
+                printf("Insertion failed. :(\n");
+            }
+            else
+            {
+                printf("Insertion done. :)\n");
+                size++;
+            }
         }
         else if(num == 2)
         {
             printf("\nEnter the index: ");
             scanf("%d", &index);
-            indDeletion(arr, size, 100, index);
-            size--;
+            int res = indDeletion(arr, size, 100, index);
+            if(res == -1)
+            {
+                printf("Deletion failed. :(\n");
+            }
+            else
+            {
+                printf("Deletion done. :)\n");
+                size--;
+            }
         }
         else if(num == 3)
         {
@@ -105,9 +121,7 @@ int main()
     return 0;
 }
 
-/*
-Output:
-Give the size of the array (upto 99): 5
+/*Give the size of the array (upto 99): 5
 
 Enter the array element: 1
 Enter the array element: 2
@@ -122,14 +136,14 @@ Operations to be performed:
 4. Traverse the array.
 5. Exit.
 
-Enter the operation (1-5): 1      
+Enter the operation (1-5): 1
 
 Enter the element to insert: 6
-
 Enter the index: 5
+Insertion done. :)
 
-Operations to be performed:       
-1. Insertion at a specific index. 
+Operations to be performed:
+1. Insertion at a specific index.
 2. Deletion from a specific index.
 3. Reverse the array.
 4. Traverse the array.
@@ -151,8 +165,8 @@ Printing array in the reverse manner!
 6 5 4 3 2 1
 
 Operations to be performed:
-1. Insertion at a specific index.    
-2. Deletion from a specific index.   
+1. Insertion at a specific index.
+2. Deletion from a specific index.
 3. Reverse the array.
 4. Traverse the array.
 5. Exit.
@@ -160,6 +174,7 @@ Operations to be performed:
 Enter the operation (1-5): 2
 
 Enter the index: 5
+Deletion done. :)
 
 Operations to be performed:
 1. Insertion at a specific index.
