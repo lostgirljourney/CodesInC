@@ -180,7 +180,7 @@ struct node *delete_first(struct node *head)
     {
         temp = head;
         head = head->next;
-        printf("\nInformation on deleted note is %d\n",temp->data);
+        printf("\nInformation on deleted node is %d\n",temp->data);
         free(temp);
     }
     return head;
