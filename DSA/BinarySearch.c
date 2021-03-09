@@ -26,7 +26,7 @@ int main()
 {
     int arr[100], element, size, searchIndex;
     
-    printf("Give the size of the array (upto 99): ");
+    printf("Give the size of the array (upto 100): ");
     scanf("%d", &size);
 
     printf("\n");
