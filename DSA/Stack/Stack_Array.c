@@ -48,6 +48,11 @@ void pop(stack *s)
 
 void print_stack_top(stack *s)
 {
+    if (is_empty(s))
+    {
+        printf("Underflow.\n");
+        return;
+    }
     printf("Top Element is: %d\n", s->arr[s->top]);
 }
 
@@ -65,7 +70,7 @@ int main()
         printf("\nOperations to be performed:\n");
         printf("1. Push elements in the stack.\n");
         printf("2. Push elements in the stack.\n");
-        printf("3. Print the stack top elements.\n");
+        printf("3. Print the stack top element.\n");
         printf("0. Exit.\n");
 
         printf("\nEnter the operation (1-3 or 0 to exit): ");
