@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct node
 {
@@ -10,7 +10,7 @@ struct node
 void createCLL(struct node **head, int size)
 {
     struct node *newnode, *temp;
-    if(*head != NULL)
+    if (*head != NULL)
     {
         printf("Already Created.\n");
     }
@@ -19,9 +19,9 @@ void createCLL(struct node **head, int size)
         for (int i = 1; i <= size; i++)
         {
             printf("Enter the element: ");
-            newnode = (struct node*)malloc(sizeof(struct node));
+            newnode = (struct node *)malloc(sizeof(struct node));
             scanf("%d", &newnode->data);
-            if(*head == NULL)
+            if (*head == NULL)
             {
                 *head = newnode;
             }
@@ -39,7 +39,7 @@ void createCLL(struct node **head, int size)
 void traversalCLL(struct node *head)
 {
     struct node *loc = head;
-    if(head == NULL)
+    if (head == NULL)
     {
         printf("Empty List.\n");
     }
@@ -60,11 +60,11 @@ void traversalCLL(struct node *head)
 
 struct node *insert_start(struct node *head, int element)
 {
-    struct node *newnode = (struct node*)malloc(sizeof(struct node)), *loc;
+    struct node *newnode = (struct node *)malloc(sizeof(struct node)), *loc;
     newnode->data = element;
     newnode->next = head;
     loc = head;
-    while(loc->next!=head)
+    while (loc->next != head)
     {
         loc = loc->next;
     }
@@ -75,8 +75,8 @@ struct node *insert_start(struct node *head, int element)
 
 struct node *insert_end(struct node *head, int element)
 {
-    struct node *newnode = (struct node*)malloc(sizeof(struct node)), *loc;
-    if(head == NULL)
+    struct node *newnode = (struct node *)malloc(sizeof(struct node)), *loc;
+    if (head == NULL)
     {
         printf("Empty List.\n");
     }
@@ -85,7 +85,7 @@ struct node *insert_end(struct node *head, int element)
         newnode->data = element;
         newnode->next = head;
         loc = head;
-        while(loc->next!=head)
+        while (loc->next != head)
         {
             loc = loc->next;
         }
@@ -99,7 +99,7 @@ struct node *insert_end(struct node *head, int element)
 struct node *delete_start(struct node *head)
 {
     struct node *loc, *temp;
-    if(head == NULL)
+    if (head == NULL)
     {
         printf("Empty List.\n");
     }
@@ -108,11 +108,11 @@ struct node *delete_start(struct node *head)
         printf("Deleted element: %d\n", head->data);
         loc = head;
         temp = head;
-        while(loc->next!=head)
+        while (loc->next != head)
         {
             loc = loc->next;
         }
-        if(loc == head)
+        if (loc == head)
         {
             head = NULL;
         }
@@ -130,19 +130,19 @@ struct node *delete_start(struct node *head)
 struct node *delete_end(struct node *head)
 {
     struct node *locc, *locp;
-    if(head == NULL)
+    if (head == NULL)
     {
         printf("Empty List.\n");
     }
     else
     {
         locc = head;
-        while(locc->next!=head)
+        while (locc->next != head)
         {
             locp = locc;
             locc = locc->next;
         }
-        if(locc == head)
+        if (locc == head)
         {
             head = NULL;
         }
@@ -163,50 +163,50 @@ int main()
     int size, num, element, info, index;
     printf("Enter the size of Linked node: ");
     scanf("%d", &size);
-    createCLL(&head,size);
+    createCLL(&head, size);
 
     do
     {
         printf("\nOperations to be performed:\n");
-        printf("1. Insertion at the starting.\n");       
+        printf("1. Insertion at the starting.\n");
         printf("2. Insertion at the end.\n");
-        printf("3. Deletion at the starting.\n");       
+        printf("3. Deletion at the starting.\n");
         printf("4. Deletion at the end.\n");
-        printf("5. Traverse the Linked List.\n");        
-        printf("6. Exit.\n");        
+        printf("5. Traverse the Linked List.\n");
+        printf("6. Exit.\n");
 
         printf("\nEnter the operation (1-6): ");
         scanf("%d", &num);
 
-        if(num == 1)
+        if (num == 1)
         {
             printf("\nEnter the element to insert: ");
             scanf("%d", &element);
             head = insert_start(head, element);
         }
-        else if(num == 2)
+        else if (num == 2)
         {
             printf("\nEnter the element to insert: ");
             scanf("%d", &element);
             head = insert_end(head, element);
         }
-        else if(num == 3)
+        else if (num == 3)
         {
             head = delete_start(head);
         }
-        else if(num == 4)
+        else if (num == 4)
         {
             head = delete_end(head);
         }
-        else if(num == 5)
+        else if (num == 5)
         {
             traversalCLL(head);
         }
-        else if(num > 6 || num < 1)
+        else if (num > 6 || num < 1)
         {
             printf("Invalid option! Try again.\n");
         }
-    }while(num != 6);
+    } while (num != 6);
 
     return 0;
 }
