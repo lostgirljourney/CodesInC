@@ -14,6 +14,12 @@ void createCLL(struct node **head, int size)
     {
         printf("Already Created.\n");
     }
+    else if (size <= 0)
+    {
+        printf("Size can't be <= 0. Input again. Enter Size: ");
+        scanf("%d", &size);
+        createCLL(&(*head), size);
+    }
     else
     {
         for (int i = 1; i <= size; i++)
@@ -61,24 +67,36 @@ void traversalCLL(struct node *head)
 struct node *insert_start(struct node *head, int element)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node)), *loc;
-    newnode->data = element;
-    newnode->next = head;
-    loc = head;
-    while (loc->next != head)
+    if (head == NULL)
     {
-        loc = loc->next;
+        newnode->data = element;
+        head = newnode;
+        newnode->next = head;
     }
-    head = newnode;
-    loc->next = newnode;
+    else
+    {
+        newnode->data = element;
+        newnode->next = head;
+        loc = head;
+        while (loc->next != head)
+        {
+            loc = loc->next;
+        }
+        head = newnode;
+        loc->next = newnode;
+    }
     return head;
 }
 
 struct node *insert_end(struct node *head, int element)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node)), *loc;
+
     if (head == NULL)
     {
-        printf("Empty List.\n");
+        newnode->data = element;
+        head = newnode;
+        newnode->next = head;
     }
     else
     {

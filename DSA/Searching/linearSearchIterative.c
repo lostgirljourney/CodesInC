@@ -14,15 +14,17 @@ int linearSearch(int arr[], int size, int element)
 
 int main()
 {
-    int arr[100], element, size, searchIndex;
+    int element, size, searchIndex;
     
-    printf("Give the size of the array (upto 100): ");
+    printf("Give the size of the array: ");
     scanf("%d", &size);
+
+    int arr[size]; 
 
     printf("\n");
     for (int i = 0; i < size; i++)
     {
-        printf("Enter the array element: ", i);
+        printf("Enter the array element: ");
         scanf("%d", &arr[i]);
     }
 

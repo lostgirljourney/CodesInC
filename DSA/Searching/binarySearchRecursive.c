@@ -3,7 +3,7 @@
 int binarySearch(int arr[], int low, int high, int element)
 {
     int mid;
-    while(low <= high)
+    if(low <= high)
     {
         mid = (low+high)/2;
         if(arr[mid] == element)
@@ -12,11 +12,11 @@ int binarySearch(int arr[], int low, int high, int element)
         }
         else if(arr[mid] < element)
         {
-            low = mid+1;
+            return binarySearch(arr, mid+1, high, element);
         }
         else
         {
-            high = mid-1;
+            return binarySearch(arr, low, mid-1, element);
         }
     }
     return -1;
@@ -24,15 +24,17 @@ int binarySearch(int arr[], int low, int high, int element)
 
 int main()
 {
-    int arr[100], element, size, searchIndex;
+    int element, size, searchIndex;
     
-    printf("Give the size of the array (upto 100): ");
+    printf("Give the size of the array: ");
     scanf("%d", &size);
+
+    int arr[size];
 
     printf("\n");
     for (int i = 0; i < size; i++)
     {
-        printf("Enter the array element: ", i);
+        printf("Enter the array element: ");
         scanf("%d", &arr[i]);
     }
 

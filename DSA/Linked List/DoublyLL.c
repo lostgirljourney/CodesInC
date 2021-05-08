@@ -16,6 +16,12 @@ void createDLL(struct node **head, int size)
         printf("Already created!\n");
         return;
     }
+    else if (size <= 0)
+    {
+        printf("Size can't be <= 0. Input again. Enter Size: ");
+        scanf("%d", &size);
+        createDLL(&(*head), size);
+    }
     else
     {
         for (int i = 1; i <= size; i++)
@@ -42,6 +48,11 @@ void createDLL(struct node **head, int size)
 
 void traversalDLL(struct node *head)
 {
+    if (head == NULL)
+    {
+        printf("Empty List.\n");
+        return;
+    }
     struct node *loc, *current;
     loc = head;
     printf("List is (from left to right): ");
@@ -69,9 +80,18 @@ struct node *insert_start(struct node *head, int data)
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->prev = NULL;
     newnode->data = data;
-    newnode->next = head;
-    head->prev = newnode;
-    head = newnode;
+
+    if (head == NULL)
+    {
+        newnode->next = NULL;
+        head = newnode;
+    }
+    else
+    {
+        newnode->next = head;
+        head->prev = newnode;
+        head = newnode;
+    }
     return head;
 }
 
@@ -80,13 +100,22 @@ struct node *insert_end(struct node *head, int data)
     struct node *newnode = (struct node *)malloc(sizeof(struct node)), *loc = head;
     newnode->data = data;
 
-    while (loc->next != NULL)
+    if (head == NULL)
     {
-        loc = loc->next;
+        newnode->prev = NULL;
+        newnode->next = NULL;
+        head = newnode;
     }
-    newnode->prev = loc;
-    loc->next = newnode;
-    newnode->next = NULL;
+    else
+    {
+        while (loc->next != NULL)
+        {
+            loc = loc->next;
+        }
+        newnode->prev = loc;
+        loc->next = newnode;
+        newnode->next = NULL;
+    }
     return head;
 }
 
@@ -97,7 +126,13 @@ struct node *delete_start(struct node *head)
     struct node *temp;
     if (head == NULL)
     {
-        printf("Empty List. Deletion is impossible!\n");
+        printf("\nEmpty List. Deletion is impossible!\n");
+    }
+    else if (head->next == NULL)
+    {
+        printf("\nInformation on deleted node is %d\n", head->data);
+        free(head);
+        head = NULL;
     }
     else
     {
@@ -111,26 +146,28 @@ struct node *delete_start(struct node *head)
     return head;
 }
 
-struct node *delete_end(struct node *head)
+void delete_end(struct node **head)
 {
-    struct node *loc = head, *locn = head->next;
-    if (head == NULL)
+    struct node *loc, *locp;
+    int item;
+    if (*head == NULL)
     {
-        printf("Empty List. Deletion is impossible!\n");
+        printf("\nEmpty List. Deletion is impossible!\n");
+        return;
     }
+    loc = *head;
+    while (loc->next != NULL)
+    {
+        locp = loc;
+        loc = loc->next;
+    }
+    item = loc->data;
+    if (loc == *head)
+        *head = NULL;
     else
-    {
-        while (locn->next != NULL)
-        {
-            loc = locn;
-            locn = locn->next;
-        }
-        loc->next = NULL;
-        locn->prev = NULL;
-        printf("\nInformation on deleted note is %d\n", locn->data);
-        free(locn);
-    }
-    return head;
+        locp->next = NULL;
+    free(loc);
+    printf("\nInformation on deleted note is %d\n", item);
 }
 
 int main()
@@ -139,50 +176,50 @@ int main()
     int size, num, element, info, index;
     printf("Enter the size of Linked node: ");
     scanf("%d", &size);
-    createDLL(&head,size);
+    createDLL(&head, size);
 
     do
     {
         printf("\nOperations to be performed:\n");
-        printf("1. Insertion at the starting.\n");       
+        printf("1. Insertion at the starting.\n");
         printf("2. Insertion at the end.\n");
-        printf("3. Deletion at the starting.\n");       
+        printf("3. Deletion at the starting.\n");
         printf("4. Deletion at the end.\n");
-        printf("5. Traverse the Linked List.\n");        
-        printf("6. Exit.\n");        
+        printf("5. Traverse the Linked List.\n");
+        printf("6. Exit.\n");
 
         printf("\nEnter the operation (1-6): ");
         scanf("%d", &num);
 
-        if(num == 1)
+        if (num == 1)
         {
             printf("\nEnter the element to insert: ");
             scanf("%d", &element);
             head = insert_start(head, element);
         }
-        else if(num == 2)
+        else if (num == 2)
         {
             printf("\nEnter the element to insert: ");
             scanf("%d", &element);
             head = insert_end(head, element);
         }
-        else if(num == 3)
+        else if (num == 3)
         {
             head = delete_start(head);
         }
-        else if(num == 4)
+        else if (num == 4)
         {
-            head = delete_end(head);
+            delete_end(&head);
         }
-        else if(num == 5)
+        else if (num == 5)
         {
             traversalDLL(head);
         }
-        else if(num > 6 || num < 1)
+        else if (num > 6 || num < 1)
         {
             printf("Invalid option! Try again.\n");
         }
-    }while(num != 6);
+    } while (num != 6);
 
     return 0;
 }
