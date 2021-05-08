@@ -7,13 +7,6 @@ typedef struct que
     struct que *next;
 } queue;
 
-int isEmpty(queue *front)
-{
-    if (front == NULL)
-        return 1;
-    return 0;
-}
-
 void enqueue(queue **front, queue **rear, int element)
 {
     queue *newnode = (queue *)malloc(sizeof(queue));
